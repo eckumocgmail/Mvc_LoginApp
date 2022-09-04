@@ -1,0 +1,15 @@
+﻿@model Exception
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">@Model.GetType().</h1>
+<h2 class="text-danger">@Model.Message</h2>
+<text>@Model.StackTrace</text>
+<small>@Model.Source</small>
+<div>
+    <a  > @Model.TargetSite. </a>
+</div>
+<div>
+    <a href="@Model.HelpLink"> Справка </a>
+</div>

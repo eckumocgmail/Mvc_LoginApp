@@ -1,0 +1,32 @@
+﻿@using pickpoint_delivery_service
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model SearchModel<Product>
+<div class="container-fluid" ng-app="OrderCheckout">
+    <div class="row">
+        <div class="col-4">
+
+            <vc:tree-nav></vc:tree-nav>
+
+
+        </div>
+        <div class="col-8">
+            @foreach(var product in Model.SearchResults)
+            {
+                <div class="card">
+                    <h5 class="card-header"> @product.ProductName /h5>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <small>@product.ProductCost</small>
+                            <p class="card-text">@product.ProductDesc</p>
+                            <a href="/Holders/About/{{item.holderSerial}}" class="btn btn-primary btn-sm"> Перейти </a>
+                        </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

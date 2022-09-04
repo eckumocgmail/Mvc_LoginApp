@@ -1,0 +1,75 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model RegistrationModel
+
+
+<button class="btn @((Model.IsValidated?"btn-primary":"btn-secondary")) btn-sm" 
+        onclick="$inputSearch('search','users', '', console.log, alert)"> ПОиск </button>
+
+<div align="center">  
+    <div style="width: 640px;" align="left">
+        <h3>Регистрация учетной записи</h3>
+        <div class="text text-info">@Model.Message</div>
+        <form method="post">                     
+            <div class="col-12">
+                <label for="username" class="form-label"> Имя пользователя </label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="material-icons">person</i></span>
+                    <input type="email" asp-for="Email" class="form-control" id="username" placeholder="Электронная почта" required>
+                    <div class="invalid-feedback">
+                        Необходимо ввести имя пользователя
+                    </div>
+                </div>
+            </div><hr/>
+            <div class="col-12">
+                <label for="password" class="form-label"> Пароль </label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="material-icons">lock</i></span>
+                    <input type="password" asp-for="Password" class="form-control" id="password" placeholder="Пароль" required>
+                    <div class="invalid-feedback">
+                        Необходимо ввести пароль
+                    </div>
+                </div>
+            </div><hr/>
+            <div class="col-12">
+                <label for="password" class="form-label"> Подтверждение </label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="material-icons">lock</i></span>
+                    <input type="password" asp-for="Confirmation" class="form-control" id="confirmation" placeholder="Подтверждение" required>
+                    <div class="invalid-feedback">
+                        Необходимо ввести подтверждение пароля
+                    </div>
+                </div>
+            </div><hr/>
+
+
+            <div class="col-12">
+                <label for="password" class="form-label"> Подтверждение </label>
+                <div class="input-group has-validation">
+                                  <span class="input-group-text"><i class="material-icons">lock</i></span>
+
+                    <select asp-for="Confirmation" class="form-control">
+                        <option>я покупатель</option>
+                        <option>я продавец</option>
+                        <option>я агент</option>
+                        <option>я финансист</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Необходимо ввести подтверждение пароля
+                    </div>
+                </div>
+            </div><hr/>
+            <div class="col-12" align="right" style="padding: 10px;">
+                <button class="btn @((Model.IsValidated?"btn-primary":"btn-secondary")) btn-sm" onclick="$inputSearch"> Выполнить </button>
+            </div>
+        </form>
+    </div>
+    <div align="center">
+        <a class="nav-link" href="/Login/Login"  style="width: 100%; margin-left: 20px;">
+            <span class="oi oi-account-login" aria-hidden="true"></span> Авторизация пользователя
+        </a>
+    </div>
+</div>  
