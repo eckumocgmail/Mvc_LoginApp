@@ -1,0 +1,64 @@
+﻿@model File
+<form style="width: 100%; border-radius: 2px; box-shadow: 0px 4px 3px -2px rgba(0, 0, 0, 0.4), 0px 2px 2px 0px rgba(0, 0, 0, 0.24), 0px 2px 6px 0px rgba(0, 0, 0, 0.22);"
+      method="post"
+      enctype="multipart/form-data"
+      action="/Image/Create">
+    
+    <div style="padding: 20px;">
+        <h2>Загрузка изображений</h2>
+        <input type="hidden" asp-for="ContentType" />
+        <input type="hidden" asp-for="Data" />
+        <img id="StoredImageData" class="card-img-top" src="/Image/Show?ID=@Model.ID" alt="Card image cap">
+        <div class="validation text-danger" asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input class="form-control" asp-for="Name">
+            <span class="form-text text-danger " asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Desc"></label>
+            <textarea class="form-control" asp-for="Desc"></textarea>
+            <span class="form-text text-danger " asp-validation-for="Desc"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Data"></label>
+            <script>
+                function OnFileChanged(file) {
+                    var reader;
+                    if (file.files.length > 0) {
+                        reader = new FileReader();
+                        reader.readAsDataURL(file.files[0]);
+                        reader.onload = function () {
+                            var data = reader.result;
+                            //console.log(data,typeof(data));
+                            document.getElementById('StoredImageData').src = data;
+                            document.getElementById('Data').value = data.toString().substring(data.indexOf(',') + 1);
+                            console.log(document.getElementById('Data').value);
+                        }
+
+                    } else {
+                        console.warn('Файлы не выбраны');
+                    }
+
+                }
+                function OnSaveButtonClicked() {
+                    //event.preventDefault(); var form = document.getElementById('ImageEditForm'); form.setAttribute('action', '/Image/UpdateConfirmed');
+                }
+            </script>
+            <div class="custom-file">
+                <input type="file" name="NewData" class="custom-file-input" onchange="OnFileChanged(this); document.getElementById('DataLabel').innerHTML = this.files[0].name; ">
+                <label class="custom-file-label" id="DataLabel">Выберите файл</label>
+                <span class="invalid-feedback" asp-validation-for="Data"></span>
+            </div>
+            <span class="form-text text-danger " asp-validation-for="Data"></span>
+        </div>
+
+
+        <div style="padding: 20px;" align="right">
+            <button class="btn btn-primary">Загрузить</button>
+        </div>
+    </div>
+
+
+</form>
+

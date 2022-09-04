@@ -1,0 +1,18 @@
+﻿@*
+    Форма согласования процедуры оплаты заказа.
+    На данном этапе уже составлен договор об оказании услуг или купли-продажи.
+    Договор регистрируется в банк-клиента и получает номер из банкоской системе.
+*@
+@model IDictionary<string,bool>
+<div>            
+    @foreach(var kv in Model)
+    {
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" @((kv.Value)?"checked":"")>
+            <label class="form-check-label">
+                @kv.Key
+            </label>
+        </div>        
+    }
+     
+</div>

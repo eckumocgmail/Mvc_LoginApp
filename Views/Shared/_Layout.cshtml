@@ -1,0 +1,137 @@
+﻿@using Microsoft.AspNetCore.Http
+@using pickpoint_delivery_service
+@inject IUserAuthentication auth
+@{
+    if(ViewData.ContainsKey("Path")==false)
+        ViewData["Path"] = new List<string>();
+}
+@inject AuthDbContext db
+@inject IEventsService events
+@if (auth.IsSigned())
+{
+
+    db.Users.Find(auth.Authenticate().ID).URL = this.ViewContext.HttpContext.Request.Query.ToString();
+
+    events.Publish("LocationChanged", db.Users.Find(auth.Authenticate().ID).URL);
+
+    db.SaveChanges();    
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Mvc_Apteka</title>
+        <link rel="icon" href="~/red-logo.png" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" onerror="alert('не загрузить '+this.href)" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" onerror="alert('не загрузить '+this.href)" rel="stylesheet" />
+    <script src="https://www.google.com/recaptcha/api.js" onerror="alert('не загрузить '+this.src)"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script src="~/common.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/http.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/container.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/table.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/list.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/form.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/dialog.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/site.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/client.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EcKuMoC</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 d-flex flex-row flex-nowrap">
+                         
+                        <li class="nav-item d-flex flex-row flex-nowrap" style="width: 100%">
+                            <div class="nav-item" style="justify-self: flex-start; margin-right: auto;">
+                                <a class="nav-link text-dark" href="/App/ListModules"> Содержание </a>
+                            </div>  
+                                  <div class="nav-item" style="justify-self: flex-start; margin-right: auto;">
+                                <a class="nav-link text-dark" href="/Home/About"> О Программе </a>
+                            </div>  
+                            <div class="nav-item" style="justify-self: flex-start; margin-right: auto;">
+                                <a class="nav-link text-dark" href="/Home/Start"> Стартовая </a>
+                            </div> 
+                            <div class="nav-item" style="justify-self: flex-start; margin-right: auto;">
+                                <a class="nav-link text-dark" href="/Home/Config"> Конфигурация </a>
+                            </div> 
+                            <div class="nav-item" style="justify-self: flex-start; margin-right: auto;">
+                                <a class="nav-link text-dark" href="/Image/Index"> Каталог </a>
+                            </div> 
+                            <div class="nav-item d-flex flex-row flex-nowrap" style="justify-self: flex-end; margin-left: auto;">
+                                @if (auth.IsSigned())
+                                {
+                                  
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="/User/SearchProducts/ProductList">Товары </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="/User/ProductHolders/HoldersList">Локации</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="/User/UserHome/Index">@auth.Authenticate().Account.Email</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="Index"> Выход </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index"> Авторизация </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Index"> Регистрация </a>
+                                    </li>
+                            
+                                } 
+                            </div>
+                                                       
+                        </li>
+                          
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        
+        <main role="main" class="pb-3">
+          
+            @RenderBody()
+        </main>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <div align="center">
+            <img height="110" src="/beeline.png" style="border: 1px solid black; 120px; height: 110px;"/>
+            <img src="/sber.png"   />
+            <img src="/qiwi.png"   />
+            <img src="/mega.png"    />
+
+        </div>
+
+    </div>
+
+ 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
