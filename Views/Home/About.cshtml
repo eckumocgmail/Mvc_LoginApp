@@ -1,0 +1,128 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IUserAuthentication auth
+@{
+    if(ViewData.ContainsKey("Path")==false)
+        ViewData["Path"] = new List<string>();
+}
+@inject AuthDbContext db
+@if (auth.IsSigned())
+{
+    auth.Authenticate().URL = this.ViewContext.HttpContext.Request.Query.ToString();
+    
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Mvc_Apteka</title>
+        <link rel="icon" href="~/red-logo.png" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" onerror="alert('не загрузить '+this.href)" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" onerror="alert('не загрузить '+this.href)" rel="stylesheet" />
+    <script src="https://www.google.com/recaptcha/api.js" onerror="alert('не загрузить '+this.src)"></script>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/common.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/http.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/container.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/table.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/list.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/form.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/dialog.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+    <script src="~/site.js" onerror="alert(event)" onload="console.log(this.src + ' success loaded');"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mvc_Apteka</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (auth.IsSigned())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/User/Holders/List">Локации </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ProductsSearch" asp-action="Index">Поиск </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Товары </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Exchange" asp-action="Index"> Обмен </a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ProductsXml" asp-action="Index"> 
+                                Настройки соединения с источником </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ProductsDatabase" asp-action="Config"> 
+                                Настройки соединения с источником </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"> О программе </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="Index"> Выход </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index"> Авторизация </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Index"> Регистрация </a>
+                            </li>
+                            
+                        }
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <style>
+        *{ padding: 0px; margin: 0px;
+        }</style>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+
+                <ul class="list-group">
+                    <li  class="list-group-item">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <input type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Text input with checkbox">
+                         <div class="input-group-append">
+                        
+                                <span class="btn btn-primary btn-sm">open</span>
+                                            
+                          </div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="col-8"></div>
+        </div>
+
+    </div>
+
+ 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿
+    <h2>История изменений товаров каталога</h2>
+    <div>
+        <a href="/Home/ClearHistory">отчистить</a>
+    </div>
+    <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Время</th>
+                    <th scope="col">ИД</th>
+                    <th scope="col">Наименование</th>
+                    <th scope="col">Изм. объёма</th>
+                    <th scope="col">Тек. объём</th>
+                    <th scope="col">Изм. цены</th>
+                    <th scope="col">Текущая цена</th>
+                </tr>
+            </thead>
+            <tbody>
+                @try{
+                
+                    @inject AppDbContext appDbContext
+                
+                    @foreach(var next in appDbContext.ProductActivities)
+                    {
+                        <tr>
+                            <th scope="col">@next.BeginDate.ToLongTimeString()</th>
+                            <th scope="col">@next.ID</th>
+                            <th scope="col">@next.ProductID</th>
+                            <th scope="col">@next.ProductName</th>
+                            <th scope="col">@next.ProductCountDev</th>
+                            <th scope="col">@next.ProductCount</th>
+                            <th scope="col">@next.ProductPriceDev</th>
+                            <th scope="col">@next.ProductPrice</th>
+                        </tr>
+                    }
+                }
+                catch(Exception ex)
+                {
+                    <tr>
+                        <td colspan="8">
+                            <div class="alert alert-danger">@ex.Message</div>
+                        </td>
+                             
+                    </tr>
+
+                }
+                
+            </tbody>
+    </table>

@@ -1,0 +1,17 @@
+﻿@model StoredImage  
+<div align="center" >
+    <h2>Подтвердите удаление</h2>
+    <div class="card w-100 h-100">
+        
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">@Model.Desc</p>
+            <img class="card-img-top highlight" 
+                 
+                 src="/Image/Show?ID=@Model.ID" alt="Card image cap">
+            <a href="/Image/DeleteConfirmed?ID=@Model.ID" class="btn btn-danger">Удалить</a>
+            <a href="/Image/Index" class="btn btn-secondary">Отмена</a>
+
+        </div>
+    </div>
+</div>

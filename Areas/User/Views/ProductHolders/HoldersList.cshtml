@@ -1,0 +1,25 @@
+﻿@using pickpoint_delivery_service
+@inject DeliveryDbContext db
+
+@model SearchModel<Holder>
+@{
+    Layout = "_UserLayout";
+}
+
+<div class="card">
+    <form>
+        <div class="form-group d-flex flex-row">
+         
+            <input class="form-control"/>
+            <span class="btn btn-sm"></span>
+        </div>
+    </form>
+
+    <ul class="list-group" style="height: 320px;">
+        @foreach(var result in Model.SearchResults)
+        {
+            <li class="list-group-item">@result.HolderLocation</li>
+        }
+    </ul>
+</div>
+ 

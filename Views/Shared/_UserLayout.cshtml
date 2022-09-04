@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <center class="btn btn-secodary w-100">
+                
+                Меню
+            </center>
+            <script>
+                var activated = null;
+                function reset(){
+                    const all = document.createElementById('group').childNodes;
+                    for(let i=0; i<all.length; i++){
+                        all[i].classList.remove('active');
+                    }
+                }
+                 
+            </script>
+            <ul class="list-group" id="group" 
+                onclick="if(activated)
+                            activated.classList.remove('active');
+
+                         (activated=event.target).classList.add('active');
+                        
+                         const href = activated.getAttribute('href');
+                         var request = new XMLHttpRequest();
+                     
+                         request.open('GET', href, false);
+                        
+
+                         request.send(null);
+                         document.getElementById('ContentPane').innerHTML = request.responseText;
+">
+
+
+                <li class="list-group-item" href="/User/SearchProducts/ProductList"> Главная </li>
+                <li class="list-group-item" href="/User/UserSettings/Index"> Настройки </li>
+               
+
+            </ul>
+        </div>
+ 
+        <div class="col-9" id="ContentPane">
+            @RenderBody()
+        </div>
+        
+
+    </div>
+
+</div>
