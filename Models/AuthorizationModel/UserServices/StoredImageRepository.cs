@@ -8,11 +8,11 @@ using System.Linq;
 using System.Threading.Tasks;
 public interface IStoredImageRepository
 {
-    public Task<int> Create(StoredImage image);
-    public Task<StoredImage[]> GetAll();
-    public Task<StoredImage> GetByID(int iD);
+    public Task<int> Create(File image);
+    public Task<File[]> GetAll();
+    public Task<File> GetByID(int iD);
     public Task<int> Remove(int iD);
-    public Task<int> Update(StoredImage model);
+    public Task<int> Update(File model);
 }
 
 public class StoredImageRepository: IStoredImageRepository 
@@ -23,7 +23,7 @@ public class StoredImageRepository: IStoredImageRepository
     {
         _context = context;
     }
-    public async Task<int> Create(StoredImage image)
+    public async Task<int> Create(File image)
     {
         _context.StoredImages.Add(image);
         _context.SaveChanges();
@@ -31,14 +31,14 @@ public class StoredImageRepository: IStoredImageRepository
         return 1;
     }
 
-    public Task<StoredImage[]> GetAll()
+    public Task<File[]> GetAll()
     {
         return Task.Run(() => {
             return _context.StoredImages.ToArray();
         });
     }
 
-    public async Task<StoredImage> GetByID(int ID)
+    public async Task<File> GetByID(int ID)
     {
         return await _context.StoredImages.Where(i => i.ID == ID).FirstOrDefaultAsync();
     }
@@ -58,7 +58,7 @@ public class StoredImageRepository: IStoredImageRepository
             
     }
 
-    public async Task<int> Update(StoredImage image)
+    public async Task<int> Update(File image)
     {
          
         if (image == null)

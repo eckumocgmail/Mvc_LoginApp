@@ -15,20 +15,20 @@ namespace MVC.Album.Services
         {
             _context = context;
         }
-        public async Task<int> Create(StoredImage image)
+        public async Task<int> Create(File image)
         {
             _context.StoredImages.Add(image);
             return await _context.SaveChangesAsync();            
         }
 
-        public Task<StoredImage[]> GetAll()
+        public Task<File[]> GetAll()
         {
             return Task.Run(() => {
                 return _context.StoredImages.ToArray();
             });
         }
 
-        public async Task<StoredImage> GetByID(int ID)
+        public async Task<File> GetByID(int ID)
         {
             return await _context.StoredImages.Where(i => i.ID == ID).FirstOrDefaultAsync();
         }
@@ -48,7 +48,7 @@ namespace MVC.Album.Services
             
         }
 
-        public async Task<int> Update(StoredImage image)
+        public async Task<int> Update(File image)
         {
          
             if (image == null)

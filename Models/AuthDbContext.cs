@@ -21,9 +21,9 @@ public partial class AuthDbContext : DbContext
     //    "pwd=Gye*34FRtw;" +        
      //   "MultipleActiveResultSets=True";
 
-    public virtual DbSet<UserMessage> Messages { get; set; }
-    public virtual DbSet<UserAccount> Accounts { get; set; }
-    public virtual DbSet<StoredImage> StoredImages { get; set; }
+    public virtual DbSet<Message> Messages { get; set; }
+    public virtual DbSet<Account> Accounts { get; set; }
+    public virtual DbSet<File> StoredImages { get; set; }
     
     public void Execute(string sql)
     {
@@ -35,8 +35,8 @@ public partial class AuthDbContext : DbContext
 
     public void CreateUserAccount(string Email, string Password)
     {
-        UserAccount acc = null;
-        this.Accounts.Add(acc=new UserAccount() { 
+        Account acc = null;
+        this.Accounts.Add(acc=new Account() { 
             Email = Email,
             Password = Password
         });
@@ -65,7 +65,7 @@ public partial class AuthDbContext : DbContext
 
 
     // факты 
-    public virtual DbSet<LoginFact> LoginFacts { get; set; }
+    public virtual DbSet<Login> LoginFacts { get; set; }
 
     public AuthDbContext( ) : base() { }
 

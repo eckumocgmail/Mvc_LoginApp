@@ -3316,8 +3316,16 @@ namespace pickpoint_delivery_service
     }
  
 
+
+
+    /// <summary>
+    /// Функция публикации событий 
+    /// </summary>
     public interface IEventsService
     {
+        /// <summary>
+        /// Публикация события
+        /// </summary>
         public void Publish(string type, object data);
     }
 
@@ -3327,7 +3335,37 @@ namespace pickpoint_delivery_service
     {
         public void Publish(string type, object data)
         {
-            SerializeObject($"evnet message: {type}\n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+SerializeObject(data));  
+            Console.WriteLine($"{type}: \n"+ SerializeObject(data));  
         }
     }
 

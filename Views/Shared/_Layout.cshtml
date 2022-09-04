@@ -1,14 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using pickpoint_delivery_service
 @inject IUserAuthentication auth
 @{
     if(ViewData.ContainsKey("Path")==false)
         ViewData["Path"] = new List<string>();
 }
 @inject AuthDbContext db
+@inject IEventsService events
 @if (auth.IsSigned())
 {
-    auth.Authenticate().URL = this.ViewContext.HttpContext.Request.Query.ToString();
-    
+
+    db.Users.Find(auth.Authenticate().ID).URL = this.ViewContext.HttpContext.Request.Query.ToString();
+
+    events.Publish("LocationChanged", db.Users.Find(auth.Authenticate().ID).URL);
+
+    db.SaveChanges();    
 }
 <!DOCTYPE html>
 <html lang="en">

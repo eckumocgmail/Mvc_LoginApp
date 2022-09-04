@@ -25,20 +25,20 @@ public class User: ActiveObject
     public User()
     {            
         UserGroups = new List<UserGroups>();
-        Inbox = new List<UserMessage>();
-        Outbox = new List<UserMessage>();
+        Inbox = new List<Message>();
+        Outbox = new List<Message>();
 
     }
 
-    public User(Role role, Person person, UserAccount account, Settings settings)
+    public User(Role role, Person person, Account account, Settings settings)
     {
         UserGroups = new List<UserGroups>();     
         Role = role;
         Person = person;
         Account = account;
         Settings = settings;
-        Inbox = new List<UserMessage>();
-        Outbox = new List<UserMessage>();
+        Inbox = new List<Message>();
+        Outbox = new List<Message>();
     }
 
     public int ID { get; set; }
@@ -51,7 +51,7 @@ public class User: ActiveObject
 
     [DisplayName("Учетная запись")]
     public int AccountID { get; set; }
-    public virtual UserAccount Account { get; set; }
+    public virtual Account Account { get; set; }
 
 
     [DisplayName("Роль")]
@@ -78,10 +78,10 @@ public class User: ActiveObject
     public int LoginCount { get; set; }
 
         
-    public virtual List<UserMessage> Inbox { get; set; }
+    public virtual List<Message> Inbox { get; set; }
 
     [NotMapped]
-    public virtual List<UserMessage> Outbox { get; set; }
+    public virtual List<Message> Outbox { get; set; }
 
         
     /// <summary>

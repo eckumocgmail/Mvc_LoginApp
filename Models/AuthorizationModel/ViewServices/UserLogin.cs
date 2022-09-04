@@ -56,7 +56,7 @@ public class UserLogin : IUserLogin
     public User GetUserByEmail(string email)
     {
         var user = new User();
-        user.Account = new UserAccount();
+        user.Account = new Account();
         user.Account.Email = email;
      
         return user;

@@ -140,7 +140,7 @@ public class AuthDbInitiallizer
                 Tel="7-904-334-1124",
                 Birthday=DateTime.Now
             };
-            UserAccount account = new UserAccount() {
+            Account account = new Account() {
                 Email = $"{role.Code}@eckumoc.com",
                 Hash = GetHashSha256("eckumoc@gmail.com"),
                 Activated = DateTime.Now

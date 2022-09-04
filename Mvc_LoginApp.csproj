@@ -4,6 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
 	<NoWarn>CS0169</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Shared\Components\**" />
+    <Content Remove="Views\Shared\Components\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\**" />
+    <None Remove="Views\Shared\Components\**" />
+  </ItemGroup>
  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
@@ -24,7 +31,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\User\Views\UserPhotos\" />
-    <Folder Include="Views\Shared\Components\" />
   </ItemGroup>
 
 </Project>

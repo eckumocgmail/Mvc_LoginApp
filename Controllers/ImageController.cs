@@ -36,13 +36,13 @@ public class ImageController : Controller
     public IActionResult Create()
     {
         _logger.LogInformation($"Create()");
-        return View(new StoredImage());
+        return View(new File());
     }
 
     public async Task<IActionResult> Delete(int ID)
     {
         _logger.LogInformation($"Delete({ID})");
-        StoredImage image = await _images.GetByID(ID);
+        File image = await _images.GetByID(ID);
         if (image != null)
         {
 
@@ -58,7 +58,7 @@ public class ImageController : Controller
     public async Task<IActionResult> Edit(int ID)
     {
         _logger.LogInformation($"Edit({ID})");
-        StoredImage image = await _images.GetByID(ID);
+        File image = await _images.GetByID(ID);
         if (image != null)
         {
 
@@ -71,7 +71,7 @@ public class ImageController : Controller
         }
     }
 
-    public async Task<IActionResult> Update(StoredImage model)
+    public async Task<IActionResult> Update(File model)
     {
         _logger.LogInformation($"Update({model.ID})");
         if (HttpContext.Request.HasFormContentType)
@@ -105,7 +105,7 @@ public class ImageController : Controller
 
  
     [HttpPost]
-    public async Task<IActionResult> Create(StoredImage model)
+    public async Task<IActionResult> Create(File model)
     {
         _logger.LogInformation($"Create({model})");
      
@@ -155,7 +155,7 @@ public class ImageController : Controller
     public async Task Show( int ID )
     {
         _logger.LogInformation($"Show({ID})");
-        StoredImage image = await _images.GetByID(ID);
+        File image = await _images.GetByID(ID);
         if(image != null)
         {      
             Response.ContentType = image.ContentType;
@@ -171,7 +171,7 @@ public class ImageController : Controller
         _logger.LogInformation($"ShowFromTempData( )");
         if (TempData.ContainsKey("Image") == true)
         {
-            StoredImage image = (StoredImage)TempData["Image"];
+            File image = (File)TempData["Image"];
             Response.ContentType = image.ContentType;
             byte[] data = image.Data;
             await Response.Body.WriteAsync(data, 0, data.Length);

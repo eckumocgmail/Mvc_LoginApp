@@ -4,13 +4,15 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace ASpbLibs.Common.CommonTypes.DataTypes
+ 
+public class NamedObject: BaseEntity
 {
-    public class NamedObject
-    {
-        [DisplayName("Наименование")]
-        [Required(ErrorMessage = "Необходимо указать наменование")]
-        public string Name { get; set; }
-    }
+    [DisplayName("Наименование")]
+    [Required(ErrorMessage = "Необходимо указать наменование")]
+    public string Name { get; set; }
+
+    [DisplayName("Определение")]
+    [DataType(DataType.MultilineText)]
+    public string Description { get; set; }
 }
+ 
